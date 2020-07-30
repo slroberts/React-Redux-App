@@ -11,11 +11,13 @@ const App = (props) => {
   return (
     <div>
       <h1>Developer's Hub</h1>
-      <button onClick={() => props.fetchJobsData()}>List all jobs</button>
+
       <SearchJobsForm />
       <SearchResults searchResults={props.searchResults} />
 
       {props.isFetching ? <p>loading...</p> : <JobsList jobs={props.jobs} />}
+
+      <button onClick={() => props.fetchJobsData()}>List all jobs</button>
     </div>
   );
 };

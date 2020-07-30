@@ -6,17 +6,15 @@ const SearchJobsForm = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
-    console.log("SR: handleChange: ", e.target.value);
     setSearchTerm({
       searchTerm: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
-    console.log("SR: handleChange: ", searchTerm);
     e.preventDefault();
 
-    searchJobsData(searchTerm);
+    props.searchJobsData(searchTerm.searchTerm);
 
     setSearchTerm({
       searchTerm: "",
