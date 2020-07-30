@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {connect} from "react-redux";
 import {searchJobsData} from "../actions";
 
+import {Form, Grid, Button} from "semantic-ui-react";
+
 const SearchJobsForm = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -14,7 +16,9 @@ const SearchJobsForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    props.searchJobsData(searchTerm.searchTerm);
+    if (searchTerm.length > 0) {
+      props.searchJobsData(searchTerm.searchTerm);
+    }
 
     setSearchTerm({
       searchTerm: "",
@@ -22,14 +26,22 @@ const SearchJobsForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="searchInput"
-        value={props.searchTerm}
-        onChange={handleChange}
-      />
-      <button>Search Jobs</button>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <Grid centered stackable columns={2}>
+        <Grid.Column tablet={12} computer={5}>
+          <Form.Input
+            name="searchInput"
+            value={props.searchTerm}
+            onChange={handleChange}
+          />
+        </Grid.Column>
+        <Grid.Column tablet={12} computer={3}>
+          <Button color="teal" style={{width: "100%"}}>
+            Search Jobs
+          </Button>
+        </Grid.Column>
+      </Grid>
+    </Form>
   );
 };
 
