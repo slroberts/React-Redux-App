@@ -29,7 +29,6 @@ export const fetchJobsData = () => (dispatch) => {
 
 export const searchJobsData = (searchTerm) => (dispatch) => {
   dispatch({type: SEARCH_JOBS_START});
-
   axios
     .get(
       `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${searchTerm}`

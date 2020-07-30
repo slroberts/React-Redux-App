@@ -11,7 +11,7 @@ const initialState = {
   isFetching: false,
   jobs: [],
   error: "",
-  searchTerm: "",
+  searchResults: [],
 };
 
 export const jobsReducer = (state = initialState, action) => {
@@ -43,7 +43,7 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        jobs: action.payload,
+        searchResults: action.payload,
         error: "",
       };
     case SEARCH_JOBS_ERROR:
