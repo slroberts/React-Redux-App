@@ -16,9 +16,9 @@ const SearchJobsForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (searchTerm.length > 0) {
-      props.searchJobsData(searchTerm.searchTerm);
-    }
+    // if (searchTerm.length > 0) {
+    props.searchJobsData(searchTerm.searchTerm);
+    // }
 
     setSearchTerm({
       searchTerm: "",
