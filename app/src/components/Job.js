@@ -1,4 +1,8 @@
 import React from "react";
+
+import {connect} from "react-redux";
+import {saveJob, unsaveJob} from "../actions";
+
 import {Button, Card, Image} from "semantic-ui-react";
 
 const Job = (props) => {
@@ -15,10 +19,23 @@ const Job = (props) => {
         {/* <Card.Description>{job.description}</Card.Description> */}
       </Card.Content>
       <Card.Content extra>
-        <Button onClick={() => window.open(props.job.url)}>view job</Button>
+        <Button onClick={() => window.open(props.job.url)}>View Job</Button>
+        {props.isSaved ? (
+          <Button onClick={() => props.unsaveJob(props.job)}>Unsave</Button>
+        ) : (
+          <Button onClick={() => props.saveJob(props.job)}>Save Job</Button>
+        )}
+
+        {console.log(props.isSaved)}
       </Card.Content>
     </Card>
   );
 };
 
-export default Job;
+const mapStateToProps = (state) => {
+  return {
+    isSaved: state.isSaved,
+  };
+};
+
+export default connect(mapStateToProps, {saveJob, unsaveJob})(Job);

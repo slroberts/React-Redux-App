@@ -5,6 +5,8 @@ import {
   SEARCH_JOBS_START,
   SEARCH_JOBS_SUCCESS,
   SEARCH_JOBS_ERROR,
+  SAVE_JOB,
+  UNSAVE_JOB,
 } from "../actions";
 
 const initialState = {
@@ -28,6 +30,8 @@ const initialState = {
   ],
   error: "",
   searchResults: [],
+  isSaved: false,
+  savedJobs: [],
 };
 
 export const jobsReducer = (state = initialState, action) => {
@@ -67,6 +71,24 @@ export const jobsReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: action.payload,
+      };
+    case SAVE_JOB:
+      console.log(action.payload);
+
+      return {
+        ...state,
+        isSaved: true,
+        savedJobs: [action.payload],
+      };
+    case UNSAVE_JOB:
+      console.log(action.payload);
+
+      return {
+        ...state,
+        isSaved: false,
+        savedJobs: state.savedJobs.filter(
+          (job) => job.id !== action.payload.id
+        ),
       };
     default:
       return state;
