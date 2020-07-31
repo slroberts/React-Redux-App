@@ -1,55 +1,57 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Route, Switch} from "react-router-dom";
 
 import {fetchJobsData} from "../src/actions";
 
+import NavBar from "./components/NavBar";
 import SearchJobsForm from "./components/SearchJobsForm";
 import JobsList from "./components/JobsList";
 import SearchResults from "./components/SearchResults";
+import SavedJobs from "./components/SavedJobs";
 
-import {
-  Loader,
-  Container,
-  Header,
-  Grid,
-  Divider,
-  Button,
-} from "semantic-ui-react";
+import {Loader, Container, Grid, Divider, Button} from "semantic-ui-react";
 
 const App = (props) => {
   return (
     <Container>
-      <Header as="h1" textAlign="center" style={{margin: "4rem 0"}}>
-        Developer's Hub
-      </Header>
+      <NavBar />
+      <Switch>
+        <Route exact path="/saved-jobs">
+          <SavedJobs savedJobs={props.savedJobs} />
+        </Route>
+      </Switch>
 
-      <SearchJobsForm />
-      <Grid centered>
-        <Grid.Row>
-          <Grid.Column computer={8}>
-            <Divider horizontal>Or</Divider>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column computer={8}>
-            <Button
-              color="black"
-              style={{width: "100%", marginBottom: "4rem"}}
-              onClick={() => props.fetchJobsData()}
-            >
-              List All Jobs
-            </Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Route exact path="/">
+        <SearchJobsForm />
 
-      <SearchResults searchResults={props.searchResults} />
+        <Grid centered>
+          <Grid.Row>
+            <Grid.Column computer={8}>
+              <Divider horizontal>Or</Divider>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column computer={8}>
+              <Button
+                color="black"
+                style={{width: "100%", marginBottom: "4rem"}}
+                onClick={() => props.fetchJobsData()}
+              >
+                List All Jobs
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
 
-      {props.isFetching ? (
-        <Loader active inline="centered" />
-      ) : (
-        <JobsList jobs={props.jobs} />
-      )}
+        <SearchResults searchResults={props.searchResults} />
+
+        {props.isFetching ? (
+          <Loader active inline="centered" />
+        ) : (
+          <JobsList jobs={props.jobs} />
+        )}
+      </Route>
     </Container>
   );
 };
@@ -60,6 +62,7 @@ const mapStateToProps = (state) => {
     jobs: state.jobs,
     error: state.error,
     searchResults: state.searchResults,
+    savedJobs: state.savedJobs,
   };
 };
 export default connect(mapStateToProps, {fetchJobsData})(App);
