@@ -8,21 +8,17 @@ const SearchJobsForm = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
-    setSearchTerm({
-      searchTerm: e.target.value,
-    });
+    setSearchTerm(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // if (searchTerm.length > 0) {
-    props.searchJobsData(searchTerm.searchTerm);
+    props.searchJobsData(searchTerm);
     // }
 
-    setSearchTerm({
-      searchTerm: "",
-    });
+    setSearchTerm("");
   };
 
   return (
@@ -31,7 +27,7 @@ const SearchJobsForm = (props) => {
         <Grid.Column tablet={12} computer={5}>
           <Form.Input
             name="searchInput"
-            value={props.searchTerm}
+            value={searchTerm}
             onChange={handleChange}
           />
         </Grid.Column>
