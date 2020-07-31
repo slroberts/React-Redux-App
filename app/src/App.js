@@ -18,7 +18,9 @@ const App = (props) => {
       <NavBar />
       <Switch>
         <Route exact path="/saved-jobs">
-          <SavedJobs savedJobs={props.savedJobs} />
+          <Grid centered>
+            <SavedJobs savedJobs={props.savedJobs} />
+          </Grid>
         </Route>
       </Switch>
 
