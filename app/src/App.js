@@ -9,8 +9,18 @@ import SearchJobsForm from "./components/SearchJobsForm";
 import JobsList from "./components/JobsList";
 import SearchResults from "./components/SearchResults";
 import SavedJobs from "./components/SavedJobs";
+import ViewJob from "./components/ViewJob";
 
-import {Loader, Container, Grid, Divider, Button} from "semantic-ui-react";
+import {
+  Loader,
+  Container,
+  Grid,
+  Divider,
+  Button,
+  Message,
+} from "semantic-ui-react";
+
+import {Icon} from "semantic-ui-react";
 
 const App = (props) => {
   return (
@@ -18,9 +28,17 @@ const App = (props) => {
       <NavBar />
       <Switch>
         <Route exact path="/saved-jobs">
-          <Grid centered>
+          {props.savedJobs.length > 0 ? (
             <SavedJobs savedJobs={props.savedJobs} />
-          </Grid>
+          ) : (
+            <Message size="large" color="blue" centered>
+              No saved jobs.
+            </Message>
+          )}
+        </Route>
+
+        <Route exact path={"/job-post"}>
+          <ViewJob />
         </Route>
       </Switch>
 
@@ -40,7 +58,7 @@ const App = (props) => {
                 style={{width: "100%", marginBottom: "4rem"}}
                 onClick={() => props.fetchJobsData()}
               >
-                List All Jobs
+                <Icon name="box" /> List All Jobs
               </Button>
             </Grid.Column>
           </Grid.Row>

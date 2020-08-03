@@ -14,7 +14,7 @@ export const fetchJobsData = () => (dispatch) => {
 
   axios
     .get(
-      "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?search=node"
+      "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?page=0"
     )
     .then((res) => {
       console.log("SR: actions/index.js: fetchJobsData: axios.then: ", res);
@@ -25,7 +25,7 @@ export const fetchJobsData = () => (dispatch) => {
     })
     .catch((err) => {
       console.log("error", err);
-      dispatch({type: FETCHING_JOBS_ERROR, payload: err.message});
+      dispatch({type: FETCHING_JOBS_ERROR, payload: err});
     });
 };
 
@@ -43,7 +43,7 @@ export const searchJobsData = (searchTerm) => (dispatch) => {
     })
     .catch((err) => {
       console.log("error", err);
-      dispatch({type: SEARCH_JOBS_ERROR, payload: err.message});
+      dispatch({type: SEARCH_JOBS_ERROR, payload: err});
     });
 };
 
@@ -51,6 +51,6 @@ export const saveJob = (job) => (dispatch) => {
   dispatch({type: SAVE_JOB, payload: job});
 };
 
-export const unsaveJob = (itemId) => (dispatch) => {
-  dispatch({type: UNSAVE_JOB, payload: itemId});
+export const unsaveJob = (jobId) => (dispatch) => {
+  dispatch({type: UNSAVE_JOB, payload: jobId});
 };
