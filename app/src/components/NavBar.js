@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Menu} from "semantic-ui-react";
-import {Icon} from "semantic-ui-react";
-
+import {Container, Menu, Icon} from "semantic-ui-react";
 const NavBar = () => {
   const [activeItem, setActiveItem] = useState("home");
 
@@ -12,8 +10,8 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-      <Menu secondary style={{marginBottom: "6rem"}}>
+    <Container>
+      <Menu secondary>
         <Menu.Item name="Developers Hub" as="h1" />
         <Menu.Menu position="right">
           <Menu.Item
@@ -37,7 +35,7 @@ const NavBar = () => {
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-    </div>
+    </Container>
   );
 };
 
