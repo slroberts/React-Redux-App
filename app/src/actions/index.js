@@ -3,24 +3,28 @@ import axios from "axios";
 export const FETCHING_JOBS_START = "FETCHING_JOBS_START";
 export const FETCHING_JOBS_SUCCESS = "FETCHING_JOBS_SUCCESS";
 export const FETCHING_JOBS_ERROR = "FETCHING_JOBS_ERROR";
-export const SEARCH_JOBS_START = "SEARCH_JOBS_START";
-export const SEARCH_JOBS_SUCCESS = "SEARCH_JOBS_SUCCESS";
-export const SEARCH_JOBS_ERROR = "SEARCH_JOBS_ERROR";
 export const SAVE_JOB = "SAVE_JOB";
 export const UNSAVE_JOB = "UNSAVE_JOB";
 
-export const fetchJobsData = () => (dispatch) => {
+const URL =
+  "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json";
+
+export const fetchJobsData = (searchTerm) => (dispatch) => {
   dispatch({type: FETCHING_JOBS_START});
 
   axios
-    .get(
-      "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?page=0"
-    )
+    .get(`${URL}?description=${searchTerm}`)
     .then((res) => {
       console.log("SR: actions/index.js: fetchJobsData: axios.then: ", res);
+      const newArr = res.data.map((job) => {
+        return {
+          ...job,
+          isSaved: false,
+        };
+      });
       dispatch({
         type: FETCHING_JOBS_SUCCESS,
-        payload: res.data,
+        payload: newArr,
       });
     })
     .catch((err) => {
@@ -29,26 +33,8 @@ export const fetchJobsData = () => (dispatch) => {
     });
 };
 
-export const searchJobsData = (searchTerm) => (dispatch) => {
-  dispatch({type: SEARCH_JOBS_START});
-  axios
-    .get(
-      `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${searchTerm}`
-    )
-    .then((res) => {
-      dispatch({
-        type: SEARCH_JOBS_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      console.log("error", err);
-      dispatch({type: SEARCH_JOBS_ERROR, payload: err});
-    });
-};
-
-export const saveJob = (job) => (dispatch) => {
-  dispatch({type: SAVE_JOB, payload: job});
+export const saveJob = (jobId) => (dispatch) => {
+  dispatch({type: SAVE_JOB, payload: jobId});
 };
 
 export const unsaveJob = (jobId) => (dispatch) => {

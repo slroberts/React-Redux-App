@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {searchJobsData} from "../actions";
+import {fetchJobsData} from "../actions";
 
-import {Form, Grid, Button, Header} from "semantic-ui-react";
-import {Icon} from "semantic-ui-react";
+import {Form, Grid, Button, Header, Icon} from "semantic-ui-react";
 
 const SearchJobsForm = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,15 +14,19 @@ const SearchJobsForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    props.searchJobsData(searchTerm);
+    props.fetchJobsData(searchTerm);
 
     setSearchTerm("");
   };
 
   return (
     <div>
-      <Header as="h2" textAlign="center" style={{marginBottom: "4rem"}}>
-        Find the job that match your skills
+      <Header
+        as="h2"
+        textAlign="center"
+        style={{marginBottom: "3rem", fontSize: "1.9rem", color: "white"}}
+      >
+        Find the job that matches your skills
       </Header>
       <Form onSubmit={handleSubmit}>
         <Grid centered stackable columns={2}>
@@ -45,4 +48,4 @@ const SearchJobsForm = (props) => {
   );
 };
 
-export default connect(null, {searchJobsData})(SearchJobsForm);
+export default connect(null, {fetchJobsData})(SearchJobsForm);

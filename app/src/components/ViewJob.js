@@ -1,16 +1,31 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Button, Card, Image} from "semantic-ui-react";
-import {Icon} from "semantic-ui-react";
-import Job from "./Job";
+import {Container, Button, Image} from "semantic-ui-react";
 
 const ViewJob = (props) => {
   return (
-    <Card.Group centered>
+    <Container>
       {props.jobs.map((job) => (
-        <Job key={job.id} job={job} />
+        <div>
+          {job.company_logo ? (
+            <Image floated="right" size="small" src={job.company_logo} />
+          ) : (
+            <Button
+              circular
+              floated="right"
+              icon="briefcase"
+              disabled
+              color="black"
+            />
+          )}
+          <p>{job.title}</p>
+          <p>{job.company}</p>
+          <p> {job.location} </p>
+          <p> {job.type}</p>
+          <p>{job.description}</p>
+        </div>
       ))}
-    </Card.Group>
+    </Container>
   );
 };
 

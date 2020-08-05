@@ -12,7 +12,12 @@ const NavBar = () => {
   return (
     <Container>
       <Menu secondary>
-        <Menu.Item name="Developers Hub" as="h1" />
+        <Menu.Item
+          name="Developers Hub"
+          as="h1"
+          position="left"
+          style={{marginLeft: "-1.5rem"}}
+        />
         <Menu.Menu position="right">
           <Menu.Item
             name="Search"
