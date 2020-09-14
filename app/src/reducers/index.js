@@ -46,7 +46,11 @@ export const jobsReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        savedJobs: newArr.filter((job) => job.id === action.payload.id),
+        savedJobs: [
+          ...state.savedJobs,
+          newArr.filter((job) => job.id === action.payload.id),
+        ],
+
         jobs: newArr.filter((job) => job.id !== action.payload.id),
       };
     case UNSAVE_JOB:
