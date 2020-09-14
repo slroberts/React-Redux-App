@@ -2,11 +2,15 @@ import React from "react";
 import Job from "./Job";
 import {Card} from "semantic-ui-react";
 
-const SavedJobs = (props) => {
+const SavedJobs = ({savedJobs}) => {
   return (
-    <Card.Group centered>
-      {props.savedJobs.map((job) => (
-        <Job key={job.id} job={job} />
+    <Card.Group>
+      {savedJobs.map((job) => (
+        <div key={Math.random()}>
+          {job.map((j) => (
+            <Job key={job.id} job={j} />
+          ))}
+        </div>
       ))}
     </Card.Group>
   );

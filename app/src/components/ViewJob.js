@@ -5,26 +5,24 @@ import {Container, Button, Image} from "semantic-ui-react";
 const ViewJob = (props) => {
   return (
     <Container>
-      {props.jobs.map((job) => (
-        <div>
-          {job.company_logo ? (
-            <Image floated="right" size="small" src={job.company_logo} />
-          ) : (
-            <Button
-              circular
-              floated="right"
-              icon="briefcase"
-              disabled
-              color="black"
-            />
-          )}
-          <p>{job.title}</p>
-          <p>{job.company}</p>
-          <p> {job.location} </p>
-          <p> {job.type}</p>
-          <p>{job.description}</p>
-        </div>
-      ))}
+      <div>
+        {props.jobs.company_logo ? (
+          <Image floated="right" size="small" src={props.jobs.company_logo} />
+        ) : (
+          <Button
+            circular
+            floated="right"
+            icon="briefcase"
+            disabled
+            color="black"
+          />
+        )}
+        <p>{props.jobs.title}</p>
+        <p>{props.jobs.company}</p>
+        <p> {props.jobs.location} </p>
+        <p> {props.jobs.type}</p>
+        <p>{props.jobs.description}</p>
+      </div>
     </Container>
   );
 };

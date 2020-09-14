@@ -24,9 +24,9 @@ const SearchJobsForm = (props) => {
       <Header
         as="h2"
         textAlign="center"
-        style={{marginBottom: "3rem", fontSize: "1.9rem", color: "white"}}
+        style={{marginBottom: "2rem", fontSize: "2rem", color: "white"}}
       >
-        Find the job that matches your skills
+        Find careers that match your skills
       </Header>
       <Form onSubmit={handleSubmit}>
         <Grid centered stackable columns={2}>

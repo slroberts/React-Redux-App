@@ -5,12 +5,12 @@ import {saveJob, unsaveJob} from "../actions";
 
 import {Button, Card, Image, Icon} from "semantic-ui-react";
 
-const Job = (props) => {
+const Job = ({job, saveJob, unsaveJob}) => {
   return (
     <Card>
       <Card.Content>
-        {props.job.company_logo ? (
-          <Image floated="right" size="tiny" src={props.job.company_logo} />
+        {job.company_logo ? (
+          <Image floated="right" size="tiny" src={job.company_logo} />
         ) : (
           <Button
             circular
@@ -20,10 +20,10 @@ const Job = (props) => {
             color="black"
           />
         )}
-        <Card.Header>{props.job.title}</Card.Header>
+        <Card.Header>{job.title}</Card.Header>
         <Card.Meta>
-          {props.job.location} <br />
-          {props.job.type}
+          {job.location} <br />
+          {job.type}
         </Card.Meta>
       </Card.Content>
       <Card.Content extra>
@@ -32,9 +32,9 @@ const Job = (props) => {
             <Icon name="eye" /> View Job
           </Link>
         </Button>
-        {props.job.isSaved ? (
+        {job.isSaved ? (
           <Button
-            onClick={() => props.unsaveJob(props.job)}
+            onClick={() => unsaveJob(job)}
             floated="right"
             negative
             size="small"
@@ -42,11 +42,7 @@ const Job = (props) => {
             <Icon name="minus" /> Unsave
           </Button>
         ) : (
-          <Button
-            onClick={() => props.saveJob(props.job)}
-            floated="right"
-            size="small"
-          >
+          <Button onClick={() => saveJob(job)} floated="right" size="small">
             <Icon name="add" /> Save Job
           </Button>
         )}
