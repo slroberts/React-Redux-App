@@ -10,15 +10,15 @@ import ViewJob from "./components/ViewJob";
 
 import {Container, Loader, Message} from "semantic-ui-react";
 
-const App = (props) => {
+const App = ({jobs, savedJobs, isFetching}) => {
   return (
     <>
       <NavBar />
 
       <Switch>
         <Route exact path="/saved-jobs">
-          {props.savedJobs.length > 0 ? (
-            <SavedJobs savedJobs={props.savedJobs} />
+          {savedJobs.length > 0 ? (
+            <SavedJobs savedJobs={savedJobs} />
           ) : (
             <Container>
               <Message size="large" color="blue" centered>
@@ -36,10 +36,10 @@ const App = (props) => {
       <Route exact path="/">
         <Hero />
         <Container>
-          {props.isFetching ? (
+          {isFetching ? (
             <Loader active inline="centered" />
           ) : (
-            <JobsList jobs={props.jobs} />
+            <JobsList jobs={jobs} />
           )}
         </Container>
       </Route>
@@ -48,6 +48,7 @@ const App = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log("SR : saveJobs : ", state.savedJobs);
   return {
     isFetching: state.isFetching,
     jobs: state.jobs,

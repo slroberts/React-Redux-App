@@ -1,19 +1,12 @@
 import React from "react";
 import Job from "./Job";
-import {Container, Card, Image, Message} from "semantic-ui-react";
+import {Container, Card, Image} from "semantic-ui-react";
 
-const JobsList = (props) => {
+const JobsList = ({jobs}) => {
   return (
     <Container>
-      {props.jobs.length === 0 ? (
+      {jobs.length === 0 ? (
         <>
-          {/* <Message
-            size="small"
-            centered
-            style={{textAlign: "center", opacity: 0.25, fontSize: "1.25rem"}}
-          >
-            Search Job Title or View All Jobs
-          </Message> */}
           <Image
             centered
             size="large"
@@ -23,7 +16,7 @@ const JobsList = (props) => {
         </>
       ) : (
         <Card.Group centered>
-          {props.jobs.map((job) => (
+          {jobs.map((job) => (
             <Job key={job.id} job={job} />
           ))}
         </Card.Group>
