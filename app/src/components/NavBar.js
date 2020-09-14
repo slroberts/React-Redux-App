@@ -16,7 +16,11 @@ const NavBar = () => {
           name="Developers Hub"
           as="h1"
           position="left"
-          style={{marginLeft: "-1.5rem"}}
+          style={{
+            marginLeft: "-1.5rem",
+            fontFamily: "Comfortaa",
+            letterSpacing: "-.120rem",
+          }}
         />
         <Menu.Menu position="right">
           <Menu.Item
