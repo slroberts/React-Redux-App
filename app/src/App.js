@@ -1,16 +1,18 @@
-import React from "react";
-import {connect} from "react-redux";
-import {Route, Switch} from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Switch, Route, useParams } from 'react-router-dom';
 
-import NavBar from "./components/NavBar";
-import Hero from "./components/Hero";
-import JobsList from "./components/JobsList";
-import SavedJobs from "./components/SavedJobs";
-import ViewJob from "./components/ViewJob";
+import NavBar from './components/NavBar';
+import Hero from './components/Hero';
+import JobsList from './components/JobsList';
+import SavedJobs from './components/SavedJobs';
+import ViewJob from './components/ViewJob';
 
-import {Container, Loader, Message} from "semantic-ui-react";
+import { Container, Loader, Message } from 'semantic-ui-react';
+import { viewJob } from './actions';
 
-const App = ({jobs, savedJobs, isFetching}) => {
+const App = ({ jobs, savedJobs, isFetching }) => {
+  const { id } = useParams();
   return (
     <>
       <NavBar />
@@ -28,8 +30,12 @@ const App = ({jobs, savedJobs, isFetching}) => {
           )}
         </Route>
 
-        <Route exact path={"/job-post"}>
-          <ViewJob />
+        <Route exact path={`/job/:id`}>
+          {isFetching ? (
+            <Loader active inline="centered" />
+          ) : (
+            <ViewJob jobs={jobs} id={id} />
+          )}
         </Route>
       </Switch>
 
@@ -48,7 +54,7 @@ const App = ({jobs, savedJobs, isFetching}) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("SR : saveJobs : ", state.savedJobs);
+  console.log('SR : saveJobs : ', state.savedJobs);
   return {
     isFetching: state.isFetching,
     jobs: state.jobs,
@@ -56,4 +62,4 @@ const mapStateToProps = (state) => {
     savedJobs: state.savedJobs,
   };
 };
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { viewJob })(App);
