@@ -1,16 +1,12 @@
-import React from "react";
-import Job from "./Job";
-import {Card} from "semantic-ui-react";
+import React from 'react';
+import Job from './Job';
+import { Card } from 'semantic-ui-react';
 
-const SavedJobs = ({savedJobs}) => {
+const SavedJobs = ({ savedJobs }) => {
   return (
     <Card.Group>
       {savedJobs.map((job) => (
-        <div key={Math.random()}>
-          {job.map((j) => (
-            <Job key={job.id} job={j} />
-          ))}
-        </div>
+        <Job key={job.id} job={job[0]} />
       ))}
     </Card.Group>
   );
