@@ -4,12 +4,15 @@ import {
   FETCHING_JOBS_ERROR,
   SAVE_JOB,
   UNSAVE_JOB,
-} from "../actions";
+  VIEW_JOB_START,
+  VIEW_JOB_SUCCESS,
+  VIEW_JOB_ERROR,
+} from '../actions';
 
 const initialState = {
   isFetching: false,
   jobs: [],
-  error: "",
+  error: '',
   savedJobs: [],
 };
 
@@ -25,7 +28,7 @@ export const jobsReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         jobs: action.payload,
-        error: "",
+        error: '',
       };
     case FETCHING_JOBS_ERROR:
       return {
@@ -60,6 +63,25 @@ export const jobsReducer = (state = initialState, action) => {
           (job) => job.id !== action.payload.id
         ),
         jobs: [...state.jobs, action.payload],
+      };
+
+    case VIEW_JOB_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case VIEW_JOB_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        jobs: state.jobs.filter((job) => job.id === action.payload.id),
+        error: '',
+      };
+    case VIEW_JOB_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
       };
     default:
       return state;

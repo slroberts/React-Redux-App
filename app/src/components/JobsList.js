@@ -1,8 +1,8 @@
-import React from "react";
-import Job from "./Job";
-import {Container, Card, Image} from "semantic-ui-react";
+import React from 'react';
+import Job from './Job';
+import { Container, Card, Image } from 'semantic-ui-react';
 
-const JobsList = ({jobs}) => {
+const JobsList = ({ jobs }) => {
   return (
     <Container>
       {jobs.length === 0 ? (
@@ -11,7 +11,7 @@ const JobsList = ({jobs}) => {
             centered
             size="large"
             src="https://opendoodles.s3-us-west-1.amazonaws.com/levitate.gif"
-            style={{opacity: 0.09}}
+            style={{ opacity: 0.09 }}
           />
         </>
       ) : (
